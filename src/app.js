@@ -38,8 +38,10 @@ Example 3:
    //		2)calculate rate for people - multiply number of people by murkup for each person and multiply it on price after flat markup
    //		3)calculate rate for product based on its category - multiply murkup for each category on  on price after flat markup
    //		4)add results received in step 2 and 3 to the price after flat markup, that we got in step 1;
-
+   
 //initial functioning start
+  
+ 
    var flatMarkUp = 0.05;
    var pplMarkUp = 0.012;
 
