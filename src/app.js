@@ -38,45 +38,94 @@ Example 3:
    //		2)calculate rate for people - multiply number of people by murkup for each person and multiply it on price after flat markup
    //		3)calculate rate for product based on its category - multiply murkup for each category on  on price after flat markup
    //		4)add results received in step 2 and 3 to the price after flat markup, that we got in step 1;
+   //check if result is not a number;
+   //check if price or number of people is not a number
+
    
 //initial functioning start
-  
- 
-   var flatMarkUp = 0.05;
-   var pplMarkUp = 0.012;
+  (function(window){
+    'use strict'
 
-   var Categories={
-   				food:0.13,
-   				electronics:0.02,
-   				drugs:0.075,
-   				'':0
-   				}
+
+       function InputError(message){
+        this.message = message;
+        this.description = (new Error()).stack;
+       }
+       
+       InputError.prototype = Object.create(Error.prototype);
+       InputError.prototype.name = "InputError";
+
+
+        function checkIfNumber(num){
+          if(!isNaN(num)&&Number.isFinite(num)){
+            return num;
+          }
+          throw new InputError("Invalid basic price: " + num);
+        }
+
+         function getPriceAfterMarkup(basicPrice,flatMarkUp){
+          return checkIfNumber(basicPrice) *(1.00 + flatMarkUp);
+         }
+
+         function getPeopleMurkUp(price,numberOfPpl){
+          return price*(checkIfNumber(numberOfPpl) * pplMarkUp);
+         }
+
+         function getCategoryMarkUp(price,productCategory){
+          return price * getProductCategoryRate(productCategory);
+         }
+
+         //check if product categories belongs to Categories object, if not, transfer it to ''
+
+         function getProductCategoryRate(productCategory){
+          if(!Categories.hasOwnProperty(productCategory)){
+          productCategory='';
+          }
+          return checkIfNumber(Categories[productCategory]);
+         }
+
+
+       var flatMarkUp = 0.05;
+       var pplMarkUp = 0.012;
+
+       var Categories={
+       				food:0.13,
+       				electronics:0.02,
+       				drugs:0.075,
+       				'':0
+       				}
 
    function calculatePrice(basicPrice,numberOfPpl,productCategory){
-   var priceAfterFlatMarkUp =getPriceAfterMarkup(basicPrice,flatMarkUp);
-   var pplMarkUpPrice = getPeopleMurkUp(priceAfterFlatMarkUp,numberOfPpl);
-   var categoryMarkUpPrice = getCategoryMarkUp(priceAfterFlatMarkUp,productCategory);
-   return priceAfterFlatMarkUp + pplMarkUpPrice + categoryMarkUpPrice;
+    //check if there are any values provided
+    if(basicPrice && basicPrice.toString().length >0 && numberOfPpl && numberOfPpl.toString().length > 0 && productCategory && productCategory.length>0){
+          
+
+         try{
+
+
+            var priceAfterFlatMarkUp =getPriceAfterMarkup(basicPrice,flatMarkUp);
+             var pplMarkUpPrice = getPeopleMurkUp(priceAfterFlatMarkUp,numberOfPpl);
+             var categoryMarkUpPrice = getCategoryMarkUp(priceAfterFlatMarkUp,productCategory);
+
+             var result =priceAfterFlatMarkUp + pplMarkUpPrice + categoryMarkUpPrice;
+
+             return result;
+
+         }
+         catch(err){ 
+            if (err instanceof InputError){
+               (console.log("not a valid number"))
+            } else{
+              throw err;
+            }
+       } 
+         
+    }
+    else{
+      return "Error: Some value was not provided or has a wrong format.";
+    }
    }
 
-   function getPriceAfterMarkup(basicPrice,flatMarkUp){
-   	return basicPrice *(1.00 + flatMarkUp);
-   }
-
-   function getPeopleMurkUp(price,numberOfPpl){
-   	return price*(numberOfPpl * pplMarkUp);
-   }
-
-   function getCategoryMarkUp(price,productCategory){
-    return price * getProductCategoryRate(productCategory);
-   }
-
-   //check if product categories belongs to Categories object, if not, transfer it to ''
-
-   function getProductCategoryRate(productCategory){
-   	if(!Categories.hasOwnProperty(productCategory)){
-   	productCategory='';
-   	}
-   	return Categories[productCategory];
-   }
+   
  //initial functioning end;
+})(window);
