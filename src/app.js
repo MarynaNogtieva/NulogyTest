@@ -46,8 +46,23 @@ Example 3:
   (function(window){
     'use strict'
 
+function define_finalMarkUpCalculator(){
+     
+          var flatMarkUp = 0.05;
+          var pplMarkUp = 0.012;
 
-       function InputError(message){
+          var Categories={
+                food:0.13,
+                electronics:0.02,
+                drugs:0.075,
+                '':0
+                }
+         //create object
+       var finalMarkUpCalculator = {};
+
+
+         function InputError(message){
+       }
         this.message = message;
         this.description = (new Error()).stack;
        }
@@ -55,12 +70,14 @@ Example 3:
        InputError.prototype = Object.create(Error.prototype);
        InputError.prototype.name = "InputError";
 
+         
+
 
         function checkIfNumber(num){
           if(!isNaN(num)&&Number.isFinite(num)){
             return num;
           }
-          throw new InputError("Invalid basic price: " + num);
+          throw new InputError("Invalid number: " + num);
         }
 
          function getPriceAfterMarkup(basicPrice,flatMarkUp){
@@ -85,47 +102,45 @@ Example 3:
          }
 
 
-       var flatMarkUp = 0.05;
-       var pplMarkUp = 0.012;
-
-       var Categories={
-       				food:0.13,
-       				electronics:0.02,
-       				drugs:0.075,
-       				'':0
-       				}
-
-   function calculatePrice(basicPrice,numberOfPpl,productCategory){
-    //check if there are any values provided
-    if(basicPrice && basicPrice.toString().length >0 && numberOfPpl && numberOfPpl.toString().length > 0 && productCategory && productCategory.length>0){
-          
-
-         try{
-
-
-            var priceAfterFlatMarkUp =getPriceAfterMarkup(basicPrice,flatMarkUp);
-             var pplMarkUpPrice = getPeopleMurkUp(priceAfterFlatMarkUp,numberOfPpl);
-             var categoryMarkUpPrice = getCategoryMarkUp(priceAfterFlatMarkUp,productCategory);
-
-             var result =priceAfterFlatMarkUp + pplMarkUpPrice + categoryMarkUpPrice;
-
-             return result;
-
-         }
-         catch(err){ 
-            if (err instanceof InputError){
-               (console.log("not a valid number"))
-            } else{
-              throw err;
-            }
-       } 
-         
-    }
-    else{
-      return "Error: Some value was not provided or has a wrong format.";
-    }
-   }
-
    
- //initial functioning end;
-})(window);
+      finalMarkUpCalculator.calculatePrice = function (basicPrice,numberOfPpl,productCategory){
+        //check if there are any values provided
+        if(basicPrice && basicPrice.toString().length >0 && numberOfPpl && numberOfPpl.toString().length > 0 && productCategory && productCategory.length>0){
+              
+
+             try{
+
+
+                var priceAfterFlatMarkUp =getPriceAfterMarkup(basicPrice,flatMarkUp);
+                 var pplMarkUpPrice = getPeopleMurkUp(priceAfterFlatMarkUp,numberOfPpl);
+                 var categoryMarkUpPrice = getCategoryMarkUp(priceAfterFlatMarkUp,productCategory);
+
+                 var result =priceAfterFlatMarkUp + pplMarkUpPrice + categoryMarkUpPrice;
+
+                 return result;
+
+              }
+             catch(err){ 
+                if (err instanceof InputError){
+                   (console.log(err.message + "\n" + err.description))
+                } else{
+                  throw err;
+                }
+           } 
+             
+        }
+        else{
+          return "Error: Some value was not provided or it has a wrong format.";
+        }
+       }
+        return finalMarkUpCalculator;
+      }
+
+      //checl if finalMarkUpCalculator already exists, if not define finalMarkUpCalculator globally
+      if(typeof(finalMarkUpCalculator)==='undefined'){
+        window.finalMarkUpCalculator = define_finalMarkUpCalculator();
+      } else{
+        console.log("Library already exists")
+      }
+     //initial functioning end;
+    })(window);
