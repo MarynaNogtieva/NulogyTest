@@ -46,7 +46,7 @@ Example 3:
   (function(window){
     'use strict'
 
-function define_finalMarkUpCalculator(){
+     function define_finalMarkUpCalculator(){
      
           var flatMarkUp = 0.05;
           var pplMarkUp = 0.012;
@@ -62,17 +62,14 @@ function define_finalMarkUpCalculator(){
 
 
          function InputError(message){
-       }
-        this.message = message;
-        this.description = (new Error()).stack;
+            this.message = message;
+            this.description = (new Error()).stack;
        }
        
-       InputError.prototype = Object.create(Error.prototype);
-       InputError.prototype.name = "InputError";
+         InputError.prototype = Object.create(Error.prototype);
+         InputError.prototype.name = "InputError";
 
          
-
-
         function checkIfNumber(num){
           if(!isNaN(num)&&Number.isFinite(num)){
             return num;
@@ -117,7 +114,7 @@ function define_finalMarkUpCalculator(){
 
                  var result =priceAfterFlatMarkUp + pplMarkUpPrice + categoryMarkUpPrice;
 
-                 return result;
+                 return Math.round(result * 100)/100;
 
               }
              catch(err){ 
