@@ -98,11 +98,17 @@ Example 3:
           return checkIfNumber(Categories[productCategory]);
          }
 
+         function checkIfEmpty(val){
+              return ((typeof val !== 'undefined'  || val !== null )) ? true : false;
+    
+        }
+
+
 
    
       finalMarkUpCalculator.calculatePrice = function (basicPrice,numberOfPpl,productCategory){
         //check if there are any values provided
-        if(basicPrice && basicPrice.toString().length >0 && numberOfPpl && numberOfPpl.toString().length > 0 && productCategory && productCategory.length>0){
+        if(checkIfEmpty(basicPrice) && checkIfEmpty(numberOfPpl) && checkIfEmpty(productCategory)){
               
 
              try{
