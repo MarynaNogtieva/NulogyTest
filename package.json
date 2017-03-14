@@ -1,0 +1,33 @@
+{
+  "name": "nulogy-markup-calculator",
+  "version": "1.0.0",
+  "description": "get cost of the sale based on the base price, number of people and product category",
+  "main": "src/app.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "chai": "3.5.0"
+  },
+  "devDependencies": {
+    "mocha": "3.2.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarynaNogtieva/NulogyTest.git"
+  },
+  "keywords": [
+    "markup",
+    "calculator",
+    "nulogy"
+  ],
+  "author": "'Maryna <'marynanogtieva@yahoo.ca'>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarynaNogtieva/NulogyTest/issues"
+  },
+  "homepage": "https://github.com/MarynaNogtieva/NulogyTest#readme"
+}
