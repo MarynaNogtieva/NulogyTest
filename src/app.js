@@ -46,8 +46,8 @@ Example 3:
   (function(window){
     'use strict'
 
-     function define_finalMarkUpCalculator(){
-     
+      function define_finalMarkUpCalculator(){
+        //predefined values
           var flatMarkUp = 0.05;
           var pplMarkUp = 0.012;
 
@@ -57,18 +57,25 @@ Example 3:
                 drugs:0.075,
                 '':0
                 }
-         //create object
-       var finalMarkUpCalculator = {};
+         //function to change rates
+          function changePplRate(rate){
+            pplMarkUp = rate;
+          }
 
+          function changeflatMarkUpRate(rate){
+            flatMarkUp = rate;
+          }
 
+         //Error methods
          function InputError(message){
             this.message = message;
             this.description = (new Error()).stack;
-       }
+          }
        
          InputError.prototype = Object.create(Error.prototype);
          InputError.prototype.name = "InputError";
-
+                  //create object
+                  //var finalMarkUpCalculator = {};
          
         function checkIfNumber(num){
           if(!isNaN(num)&&Number.isFinite(num)){
@@ -103,9 +110,14 @@ Example 3:
     
         }
 
- 
-   
-      finalMarkUpCalculator.calculatePrice = function calculateFullMarkUp (basicPrice,numberOfPpl,productCategory){
+           var finalMarkUpCalculatorTest = {
+            calculateMarkUpPrice:calculateFullMarkUp,
+            pplMarkUp:changePplRate,
+            flatMarkUp:changeflatMarkUpRate
+
+           };
+   //finalMarkUpCalculator.calculatePrice = 
+      function calculateFullMarkUp (basicPrice,numberOfPpl,productCategory){
           if(arguments.length==3){
 
 
@@ -142,14 +154,15 @@ Example 3:
           return "Error: there must be 3 arguments."  
           }
        }
-        return finalMarkUpCalculator;
+       // return finalMarkUpCalculator;
+        return finalMarkUpCalculatorTest;
       }
 
       //checl if finalMarkUpCalculator already exists, if not define finalMarkUpCalculator globally
-      if(typeof(finalMarkUpCalculator)==='undefined'){
-        window.finalMarkUpCalculator = define_finalMarkUpCalculator();
+      if(typeof(finalMarkUpCalculatorTest)==='undefined'){
+        window.finalMarkUpCalculatorTest = define_finalMarkUpCalculator();
       } else{
-        console.log("Library already exists")
+        console.log("Library finalMarkUpCalculatorTest already exists")
       }
      //initial functioning end;
     })(window);
