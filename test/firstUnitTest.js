@@ -18,7 +18,7 @@ function checkIfNumber(num){
  		
  }
 
-describe('number',function(){
+describe('Number',function(){
 	describe('checkIfNumber',function(){
 	it('should return value if it is a valid number',function(){
 		var num=123;
@@ -42,5 +42,17 @@ describe('number',function(){
 		chai.expect(checkIfEmpty(baseprice)).to.not.be.empty;
 		chai.expect(checkIfEmpty(category)).to.not.be.empty;
 	});
+	});
+
+});
+
+describe('Arguments',function(){
+	it('should be equal to 3',function(){
+			 function calculateArgumentsLength (basicPrice,numberOfPpl,productCategory){
+			 	return  arguments.length;
+			};
+
+			chai.expect(calculateArgumentsLength(1200.34,4,"food")).to.equal(3);
+
 	});
 });

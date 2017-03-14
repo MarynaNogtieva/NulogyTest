@@ -10,10 +10,11 @@
     "chai": "3.5.0"
   },
   "devDependencies": {
+    "chai": "3.5.0",
     "mocha": "3.2.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha test/firstUnitTest.js -w"
   },
   "repository": {
     "type": "git",

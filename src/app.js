@@ -103,11 +103,13 @@ Example 3:
     
         }
 
-
-
+ 
    
-      finalMarkUpCalculator.calculatePrice = function (basicPrice,numberOfPpl,productCategory){
-        //check if there are any values provided
+      finalMarkUpCalculator.calculatePrice = function calculateFullMarkUp (basicPrice,numberOfPpl,productCategory){
+          if(arguments.length==3){
+
+
+        //check if there are any values are empty
         if(checkIfEmpty(basicPrice) && checkIfEmpty(numberOfPpl) && checkIfEmpty(productCategory)){
               
 
@@ -135,6 +137,10 @@ Example 3:
         else{
           return "Error: Some value was not provided or it has a wrong format.";
         }
+
+        }else{
+          return "Error: there must be 3 arguments."  
+          }
        }
         return finalMarkUpCalculator;
       }
