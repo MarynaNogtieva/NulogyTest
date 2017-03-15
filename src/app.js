@@ -59,11 +59,19 @@ Example 3:
                 }
          //function to change rates
           function changePplRate(rate){
-            pplMarkUp = rate;
+            if( checkIfEmpty(rate)){
+              if(checkIfNumber(rate)==rate){
+                     pplMarkUp = rate;
+              }
+            }
           }
 
           function changeflatMarkUpRate(rate){
-            flatMarkUp = rate;
+             if( checkIfEmpty(rate)){
+              if(checkIfNumber(rate)==rate){
+                flatMarkUp = rate;
+              }
+            }
           }
 
          //Error methods
@@ -110,7 +118,7 @@ Example 3:
     
         }
 
-           var finalMarkUpCalculatorTest = {
+           var finalMarkUpCalculator = {
             calculateMarkUpPrice:calculateFullMarkUp,
             pplMarkUp:changePplRate,
             flatMarkUp:changeflatMarkUpRate
@@ -155,14 +163,14 @@ Example 3:
           }
        }
        // return finalMarkUpCalculator;
-        return finalMarkUpCalculatorTest;
+        return finalMarkUpCalculator;
       }
 
       //checl if finalMarkUpCalculator already exists, if not define finalMarkUpCalculator globally
-      if(typeof(finalMarkUpCalculatorTest)==='undefined'){
-        window.finalMarkUpCalculatorTest = define_finalMarkUpCalculator();
+      if(typeof(finalMarkUpCalculator)==='undefined'){
+        window.finalMarkUpCalculator = define_finalMarkUpCalculator();
       } else{
-        console.log("Library finalMarkUpCalculatorTest already exists")
+        return "Library finalMarkUpCalculator already exists.";
       }
      //initial functioning end;
     })(window);

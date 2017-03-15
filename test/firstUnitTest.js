@@ -1,8 +1,5 @@
-
-
-
 var assert = chai.assert;
-
+console.log(finalMarkUpCalculator);
 
 function checkIfNumber(num){
           if(!isNaN(num) && Number.isFinite(num)){
@@ -59,9 +56,27 @@ describe('Arguments',function(){
 	});
 });
 
-describe('FinalMarkUpCalculatorTest',function(){
+describe('finalMarkUpCalculator',function(){
+	describe('Object',function(){
 	it('should contain 3 properties',function(){
-		var propertiesNumber = Object.keys(finalMarkUpCalculatorTest).length;
+		var propertiesNumber = Object.keys(finalMarkUpCalculator).length;
 		chai.expect(propertiesNumber).to.be.equal(3);
-	})
-})
+	});
+	it('should not be an empty object',function(){
+       chai.expect(finalMarkUpCalculator).not.to.be.empty;
+	});
+	});
+	describe('Property pplMarkUp',function(){
+		it('should throw an error if invalid number is provided',function(){
+			//assert.throw(finalMarkUpCalculator.pplMarkUp("aaa"),InputError);
+			chai.expect(function(){finalMarkUpCalculator.pplMarkUp("aaa")}).to.throw(Error);
+		});
+	});
+
+	describe('Property flatMarkUp',function(){
+		it('should throw an error if invalid number is provided',function(){
+			//assert.throw(finalMarkUpCalculator.pplMarkUp("aaa"),InputError);
+			chai.expect(function(){finalMarkUpCalculator.flatMarkUp("aaa")}).to.throw(Error);
+		});
+	});
+});
