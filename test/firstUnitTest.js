@@ -1,6 +1,8 @@
 
 
+
 var assert = chai.assert;
+
 
 function checkIfNumber(num){
           if(!isNaN(num) && Number.isFinite(num)){
@@ -56,3 +58,10 @@ describe('Arguments',function(){
 
 	});
 });
+
+describe('FinalMarkUpCalculatorTest',function(){
+	it('should contain 3 properties',function(){
+		var propertiesNumber = Object.keys(finalMarkUpCalculatorTest).length;
+		chai.expect(propertiesNumber).to.be.equal(3);
+	})
+})
