@@ -61,7 +61,7 @@ Example 3:
           function changePplRate(rate){
             if( checkIfEmpty(rate)){
               if(checkIfNumber(rate)==rate){
-                     pplMarkUp = rate;
+                     pplMarkUp = rate/100;
               }
             }
           }
@@ -69,7 +69,7 @@ Example 3:
           function changeflatMarkUpRate(rate){
              if( checkIfEmpty(rate)){
               if(checkIfNumber(rate)==rate){
-                flatMarkUp = rate;
+                flatMarkUp = rate/100;
               }
             }
           }
@@ -137,7 +137,7 @@ Example 3:
 
 
                 var priceAfterFlatMarkUp =getPriceAfterMarkup(basicPrice,flatMarkUp);
-                 var pplMarkUpPrice = getPeopleMurkUp(priceAfterFlatMarkUp,numberOfPpl);
+                 var pplMarkUpPrice = getPeopleMurkUp(priceAfterFlatMarkUp,parseInt(numberOfPpl,10));
                  var categoryMarkUpPrice = getCategoryMarkUp(priceAfterFlatMarkUp,productCategory);
 
                  var result =priceAfterFlatMarkUp + pplMarkUpPrice + categoryMarkUpPrice;
