@@ -71,12 +71,34 @@ describe('finalMarkUpCalculator',function(){
 			//assert.throw(finalMarkUpCalculator.pplMarkUp("aaa"),InputError);
 			chai.expect(function(){finalMarkUpCalculator.pplMarkUp("aaa")}).to.throw(Error);
 		});
+		it('should not change number if value passed is empty',function(){
+			var inp1 = "";
+			var inp2=null;
+			var inp3=[];
+			var inp4={};
+
+			chai.expect(function(){finalMarkUpCalculator.pplMarkUp(inp1)}).to.not.equal(inp1);
+			chai.expect(function(){finalMarkUpCalculator.pplMarkUp(inp2)}).to.not.equal(inp2);
+			chai.expect(function(){finalMarkUpCalculator.pplMarkUp(inp3)}).to.not.equal(inp3);
+			chai.expect(function(){finalMarkUpCalculator.pplMarkUp(inp4)}).to.not.equal(inp4);
+		});
 	});
 
 	describe('Property flatMarkUp',function(){
 		it('should throw an error if invalid number is provided',function(){
 			//assert.throw(finalMarkUpCalculator.pplMarkUp("aaa"),InputError);
 			chai.expect(function(){finalMarkUpCalculator.flatMarkUp("aaa")}).to.throw(Error);
+		});
+		it('should not change number if value passed is empty',function(){
+			var inp1 = "";
+			var inp2=null;
+			var inp3=[];
+			var inp4={};
+
+			chai.expect(function(){finalMarkUpCalculator.flatMarkUp(inp1)}).to.not.equal(inp1);
+			chai.expect(function(){finalMarkUpCalculator.flatMarkUp(inp2)}).to.not.equal(inp2);
+			chai.expect(function(){finalMarkUpCalculator.flatMarkUp(inp3)}).to.not.equal(inp3);
+			chai.expect(function(){finalMarkUpCalculator.flatMarkUp(inp4)}).to.not.equal(inp4);
 		});
 	});
 });
